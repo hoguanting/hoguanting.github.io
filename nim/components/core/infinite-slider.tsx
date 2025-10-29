@@ -24,12 +24,11 @@ export function InfiniteSlider({
   speedOnHover,
 }: InfiniteSliderProps) {
   const items = React.Children.toArray(children)
+  const [isHovered, setIsHovered] = React.useState(false)
 
   if (items.length === 0) {
     return null
   }
-
-  const [isHovered, setIsHovered] = React.useState(false)
 
   const animationClass =
     direction === 'right'

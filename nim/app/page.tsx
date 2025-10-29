@@ -3,7 +3,6 @@ import { motion } from 'motion/react'
 import { Github } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
-import Link from 'next/link'
 import {
   PROJECTS,
   WORK_EXPERIENCE,
@@ -42,7 +41,7 @@ const TRANSITION_SECTION = {
 }
 
 const LANGUAGE_LOGOS = [
-    {
+  {
     name: 'Java',
     src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
   },
@@ -101,7 +100,7 @@ const LANGUAGE_LOGOS = [
   {
     name: 'PyTorch',
     src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pytorch/pytorch-original.svg',
-  }
+  },
 ]
 
 const TechLogoMarquee = () => {
@@ -156,7 +155,7 @@ function ProjectCard({ project }: { project: Project }) {
           {project.description}
         </p>
       </div>
-      <div className="mt-6 flex items-center left-0 justify-end space-x-4">
+      <div className="left-0 mt-6 flex items-center justify-end space-x-4">
         <a
           href={project.github}
           target="_blank"
@@ -229,7 +228,7 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-5 text-lg font-mono">Languages &amp; Tools</h3>
+        <h3 className="mb-5 font-mono text-lg">Languages &amp; Tools</h3>
         <TechLogoMarquee />
       </motion.section>
 
@@ -237,14 +236,14 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-5 text-lg font-mono">Selected Projects</h3>
+        <h3 className="mb-5 font-mono text-lg">Selected Projects</h3>
         <div className="relative w-full px-2 sm:px-0">
           <Carousel>
             <CarouselContent className="gap-6 px-1">
               {PROJECTS.map((project) => (
                 <CarouselItem
                   key={project.id}
-                  className="basis-full sm:basis-[85%] lg:basis-2/3"
+                  className="basis-[90%] sm:basis-[70%] lg:basis-[55%]"
                 >
                   <ProjectCard project={project} />
                 </CarouselItem>
@@ -263,8 +262,8 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-5 text-lg font-mono">Work Experience</h3>
-        <div className="flex flex-col space-y-2">
+        <h3 className="mb-5 font-mono text-lg">Work Experience</h3>
+        <div className="flex flex-col space-y-3">
           {WORK_EXPERIENCE.map((job) => (
             <a
               className="relative overflow-hidden rounded-2xl bg-zinc-300/30 p-[1px] dark:bg-zinc-600/30"
@@ -277,9 +276,9 @@ export default function Personal() {
                 className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
                 size={64}
               />
-              <div className="relative h-full w-full rounded-[15px] bg-white p-4 dark:bg-zinc-950">
-                <div className="relative flex w-full items-center gap-4">
-                  <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-xl bg-zinc-100 dark:bg-zinc-900">
+              <div className="relative h-full w-full rounded-[15px] bg-white p-4 sm:p-5 dark:bg-zinc-950">
+                <div className="relative flex w-full flex-col items-center gap-4 sm:flex-row sm:items-center">
+                  <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl bg-zinc-100 sm:h-16 sm:w-16 dark:bg-zinc-900">
                     <img
                       src={job.image}
                       alt={`${job.company} logo`}
@@ -287,15 +286,15 @@ export default function Personal() {
                       className="h-full w-full object-cover"
                     />
                   </div>
-                  <div className="flex flex-1 flex-col justify-center">
-                    <h4 className="font-mono text-lg dark:text-zinc-100">
+                  <div className="flex flex-1 flex-col items-center justify-center text-center sm:items-start sm:text-left">
+                    <h4 className="font-mono text-base text-zinc-900 sm:text-lg dark:text-zinc-100">
                       {job.title}
                     </h4>
-                    <p className="font-mono text-zinc-500 dark:text-zinc-400">
+                    <p className="font-mono text-sm text-zinc-500 sm:text-base dark:text-zinc-400">
                       {job.company}
                     </p>
                   </div>
-                  <p className="font-mono text-sm text-zinc-600 dark:text-zinc-400">
+                  <p className="font-mono text-xs text-zinc-600 sm:text-sm dark:text-zinc-400">
                     {job.start} - {job.end}
                   </p>
                 </div>
@@ -309,7 +308,7 @@ export default function Personal() {
         variants={VARIANTS_SECTION}
         transition={TRANSITION_SECTION}
       >
-        <h3 className="mb-5 text-lg font-mono">Connect</h3>
+        <h3 className="mb-5 font-mono text-lg">Connect</h3>
         <p className="mb-5 font-mono text-zinc-600 dark:text-zinc-400">
           Feel free to contact me at{' '}
           <a className="underline dark:text-zinc-300" href={`mailto:${EMAIL}`}>
