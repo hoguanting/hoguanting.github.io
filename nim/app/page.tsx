@@ -104,7 +104,7 @@ const LANGUAGE_LOGOS = [
   }
 ]
 
-export function TechLogoMarquee() {
+const TechLogoMarquee = () => {
   return (
     <div className="relative overflow-hidden rounded-2xl px-4 py-10">
       <InfiniteSlider
