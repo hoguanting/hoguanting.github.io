@@ -51,14 +51,16 @@ export default function RootLayout({
           defaultTheme="system"
         >
           <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-            <Spotlight
-              size={200}
-              className="from-zinc-500/60 via-zinc-300/25 to-transparent blur-2xl dark:from-white/80 dark:via-zinc-400/40"
-              springOptions={{
-                bounce: 0.3,
-                duration: 0.1,
-              }}
-            />
+            <div className="hidden sm:block">
+              <Spotlight
+                size={200}
+                className="from-zinc-500/60 via-zinc-300/25 to-transparent blur-2xl dark:from-white/80 dark:via-zinc-400/40"
+                springOptions={{
+                  bounce: 0.3,
+                  duration: 0.1,
+                }}
+              />
+            </div>
             <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-20">
               <Header />
               {children}
