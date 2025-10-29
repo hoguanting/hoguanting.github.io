@@ -272,10 +272,12 @@ export default function Personal() {
               rel="noopener noreferrer"
               key={job.id}
             >
-              <Spotlight
-                className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
-                size={64}
-              />
+              <div className="hidden sm:block">
+                <Spotlight
+                  className="from-zinc-900 via-zinc-800 to-zinc-700 blur-2xl dark:from-zinc-100 dark:via-zinc-200 dark:to-zinc-50"
+                  size={64}
+                />
+              </div>
               <div className="relative h-full w-full rounded-[15px] bg-white p-4 sm:p-5 dark:bg-zinc-950">
                 <div className="relative flex w-full flex-col items-center gap-4 sm:flex-row sm:items-center">
                   <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded-xl bg-zinc-100 sm:h-16 sm:w-16 dark:bg-zinc-900">
@@ -287,14 +289,14 @@ export default function Personal() {
                     />
                   </div>
                   <div className="flex flex-1 flex-col items-center justify-center text-center sm:items-start sm:text-left">
-                    <h4 className="font-mono text-base text-zinc-900 sm:text-lg dark:text-zinc-100">
+                    <h4 className="font-mono text-sm text-zinc-900 sm:text-lg dark:text-zinc-100">
                       {job.title}
                     </h4>
-                    <p className="font-mono text-sm text-zinc-500 sm:text-base dark:text-zinc-400">
+                    <p className="font-mono text-xs text-zinc-500 sm:text-base dark:text-zinc-400">
                       {job.company}
                     </p>
                   </div>
-                  <p className="font-mono text-xs text-zinc-600 sm:text-sm dark:text-zinc-400">
+                  <p className="font-mono text-[11px] text-zinc-600 sm:text-sm dark:text-zinc-400">
                     {job.start} - {job.end}
                   </p>
                 </div>
