@@ -1,4 +1,4 @@
-﻿import type { Metadata, Viewport } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Header } from './header'
@@ -53,6 +53,7 @@ export default function RootLayout({
           <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
             <div className="hidden sm:block">
               <Spotlight
+                trackWindow
                 size={200}
                 className="from-zinc-500/60 via-zinc-300/25 to-transparent blur-2xl dark:from-white/80 dark:via-zinc-400/40"
                 springOptions={{
@@ -72,4 +73,3 @@ export default function RootLayout({
     </html>
   )
 }
-
