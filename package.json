@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "lucide-react": "^0.548.0",
-    "motion": "^12.23.24"
+    "motion": "^12.23.24",
+    "next": "^16.0.1"
   }
 }
