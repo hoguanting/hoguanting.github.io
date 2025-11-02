@@ -1,15 +1,9 @@
 'use client'
 import { motion } from 'motion/react'
-import { Github } from 'lucide-react'
+
 import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
-import {
-  PROJECTS,
-  WORK_EXPERIENCE,
-  EMAIL,
-  SOCIAL_LINKS,
-  type Project,
-} from './data'
+
 
 import { InfiniteSlider } from '@/components/core/infinite-slider'
 import { ProgressiveBlur } from '@/components/core/progressive-blur'
