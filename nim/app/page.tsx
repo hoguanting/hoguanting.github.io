@@ -13,12 +13,6 @@ import {
 
 import { InfiniteSlider } from '@/components/core/infinite-slider'
 import { ProgressiveBlur } from '@/components/core/progressive-blur'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNavigation,
-} from '@/components/core/carousel'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
