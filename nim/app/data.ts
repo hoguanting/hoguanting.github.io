@@ -131,7 +131,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
   },
   {
     label: 'CV',
-    link: 'https://www.linkedin.com/in/hogt/',
+    link: 'https://docs.google.com/document/d/1kg-66r2_bxfsv2FgW6NGx6mpCEbjAede/edit?usp=sharing&ouid=100471996007873623968&rtpof=true&sd=true',
   },
 ]
 
