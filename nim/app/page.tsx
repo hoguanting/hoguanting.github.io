@@ -4,6 +4,11 @@ import { motion } from 'motion/react'
 import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
 
+import {
+  WORK_EXPERIENCE,
+  EMAIL,
+  SOCIAL_LINKS,
+} from './data'
 
 import { InfiniteSlider } from '@/components/core/infinite-slider'
 import { ProgressiveBlur } from '@/components/core/progressive-blur'

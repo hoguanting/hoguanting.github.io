@@ -29,7 +29,8 @@ type SocialLink = {
   link: string
 }
 
-```
+/**
+
 export const PROJECTS: Project[] = [
   {
     name: 'NutriTrack AI',
@@ -61,7 +62,7 @@ export const PROJECTS: Project[] = [
     id: 'project3',
   },
 ]
-```
+ */
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
