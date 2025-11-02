@@ -139,37 +139,6 @@ const TechLogoMarquee = () => {
   )
 }
 
-function ProjectCard({ project }: { project: Project }) {
-  return (
-    <div className="flex h-full flex-col justify-between rounded-2xl border border-zinc-200/60 bg-white p-6 transition-colors duration-200 hover:border-zinc-300 dark:border-zinc-800/60 dark:bg-zinc-950/40 dark:hover:border-zinc-700">
-      <div className="space-y-3">
-        <div className="space-y-1">
-          <h4 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
-            {project.name}
-          </h4>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400">
-            {project.techStacks}
-          </p>
-        </div>
-        <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-          {project.description}
-        </p>
-      </div>
-      <div className="left-0 mt-6 flex items-center justify-end space-x-4">
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`View ${project.name} on GitHub`}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-900 transition-colors hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50 dark:hover:bg-zinc-800"
-        >
-          <Github className="h-5 w-5" />
-        </a>
-      </div>
-    </div>
-  )
-}
-
 function MagneticSocialLink({
   children,
   link,
