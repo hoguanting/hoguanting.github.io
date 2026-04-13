@@ -1,0 +1,27 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import AdModule from '../components/AdModule.astro';
+import { formatIsoDate } from '../lib/date';
+
+interface Props {
+  title: string;
+  date: Date;
+}
+
+const { title, date } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <main class="flex-1 mt-4">
+    <header class="mb-10 border-b border-[var(--color-border)] pb-8">
+      <h1 class="text-3xl font-medium tracking-tight mb-3 text-[#111111]">{title}</h1>
+      <time class="text-sm text-[var(--color-subtle)] tabular-nums">{formatIsoDate(date)}</time>
+    </header>
+    
+    <article class="prose prose-neutral max-w-none text-[#2E2E2A]">
+      <slot />
+    </article>
+
+    <AdModule />
+  </main>
+</BaseLayout>

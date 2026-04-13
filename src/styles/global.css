@@ -1,0 +1,194 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sidebar: 'Lora', Georgia, 'Times New Roman', Times, serif;
+  --color-brand: #D96D49;
+  /* Anthropic distinct coral/copper */
+  --color-subtle: #8A857D;
+  /* Anthropic muted text */
+  --color-border: #E5E0D8;
+}
+
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+body {
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  background-color: #fdfdfc;
+  position: relative;
+  isolation: isolate;
+}
+
+.sidebar-nav {
+  font-family: var(--font-sidebar);
+  font-style: italic;
+  letter-spacing: -0.01em;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.sidebar-link {
+  color: var(--color-subtle);
+  white-space: nowrap;
+}
+
+.sidebar-link:hover {
+  color: #111111;
+}
+
+.site-main {
+  position: relative;
+}
+
+.site-rule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: var(--color-border);
+  opacity: 0.9;
+}
+
+.site-content {
+  padding-left: 0;
+}
+
+@media (min-width: 768px) {
+  .site-content {
+    padding-left: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-content {
+    padding-left: 2.5rem;
+  }
+}
+
+.terrazzo-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.9;
+}
+
+/* Base typographic styles tailored to the editorial feel */
+p {
+  margin-bottom: 1.25rem;
+}
+
+.page-subtitle {
+  color: var(--color-subtle);
+  font-size: 1.125rem;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.tab-leader {
+  align-self: end;
+  color: var(--color-border);
+  height: 4px;
+  position: relative;
+  margin-bottom: 0.1rem;
+  transition: color 0.15s ease;
+}
+
+.tab-leader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, currentColor 1px, transparent 1.2px);
+  background-position: center;
+  background-repeat: repeat-x;
+  background-size: 10px 4px;
+}
+
+.group:hover .tab-leader {
+  color: var(--color-brand);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  color: #111111;
+}
+
+h1 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-brand);
+}
+
+/* Keep inline content links clearly identifiable without affecting nav links */
+p a,
+li a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+ul {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+@supports (view-transition-name: none) {
+  @media not (prefers-reduced-motion: reduce) {
+    ::view-transition-old(crossfade) {
+      animation: hide 0.4s cubic-bezier(0.6, 0, 0.8, 1) forwards;
+    }
+
+    ::view-transition-new(crossfade) {
+      opacity: 0;
+      animation: appear 0.6s ease 0.2s forwards;
+    }
+  }
+}
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}

@@ -1,0 +1,174 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+import Navigation from '../components/Navigation.astro';
+import { siteConfig } from '../config';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const baseTitle = siteConfig.title;
+const { title = baseTitle, description = "A minimal personal website" } = Astro.props;
+
+const suffix = `- ${baseTitle}`;
+const documentTitle =
+  title === baseTitle
+    ? baseTitle
+    : title.endsWith(suffix)
+      ? title
+      : `${title} ${suffix}`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <ClientRouter />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{documentTitle}</title>
+    <!-- Inter for body copy; Lora italic for sidebar navigation -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-[#FDFDFC] text-[#1A1A1A] antialiased selection:bg-[#EAE6DF] min-h-screen px-6 py-8 sm:px-10 sm:py-10 md:px-14 md:py-14">
+    <canvas class="terrazzo-canvas" aria-hidden="true" transition:persist></canvas>
+    <div class="relative z-10 flex flex-col md:flex-row">
+      <aside class="shrink-0 md:w-[140px] lg:w-[152px]">
+        <Navigation />
+      </aside>
+      <main class="site-main relative flex-1 max-w-[640px] pt-6 md:pt-0 md:pl-6 lg:pl-10">
+        <div class="site-rule" aria-hidden="true"></div>
+        <article class="site-content" transition:name="crossfade">
+          <slot />
+        </article>
+      </main>
+    </div>
+    <script is:inline>
+      (() => {
+        if (window.__terrazzoBackgroundInitialized) return;
+        window.__terrazzoBackgroundInitialized = true;
+
+        const body = document.body;
+        const canvas = document.querySelector('.terrazzo-canvas');
+        if (!body || !(canvas instanceof HTMLCanvasElement)) return;
+
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        const colors = ['rgba(208, 202, 193, 0.64)', 'rgba(194, 201, 191, 0.58)', 'rgba(201, 194, 186, 0.54)'];
+        const particles = [];
+        const pointer = { x: window.innerWidth * 0.5, y: window.innerHeight * 0.5, active: false };
+        let width = 0;
+        let height = 0;
+        let rafId = 0;
+
+        const random = (min, max) => min + Math.random() * (max - min);
+
+        const resizeCanvas = () => {
+          const dpr = Math.min(window.devicePixelRatio || 1, 2);
+          width = window.innerWidth;
+          height = window.innerHeight;
+          canvas.width = Math.round(width * dpr);
+          canvas.height = Math.round(height * dpr);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          rebuildParticles();
+        };
+
+        const createParticle = () => {
+          const x = random(0, width);
+          const y = random(0, height);
+          return {
+            x,
+            y,
+            homeX: x,
+            homeY: y,
+            vx: 0,
+            vy: 0,
+            phase: random(0, Math.PI * 2),
+            wanderSpeed: random(0.35, 0.75),
+            radius: random(0.9, 1.55),
+            color: colors[Math.floor(Math.random() * colors.length)]
+          };
+        };
+
+        const rebuildParticles = () => {
+          particles.length = 0;
+          const count = Math.max(280, Math.round((width * height) / 2600));
+          for (let i = 0; i < count; i += 1) {
+            particles.push(createParticle());
+          }
+        };
+
+        const drawParticle = (particle) => {
+          ctx.beginPath();
+          ctx.fillStyle = particle.color;
+          ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+          ctx.fill();
+        };
+
+        const stepParticle = (particle, time) => {
+          const wanderX = Math.cos(time * particle.wanderSpeed + particle.phase) * 0.02;
+          const wanderY = Math.sin(time * (particle.wanderSpeed * 0.82) + particle.phase) * 0.02;
+          const homeDx = particle.homeX - particle.x;
+          const homeDy = particle.homeY - particle.y;
+
+          particle.vx += homeDx * 0.0018 + wanderX;
+          particle.vy += homeDy * 0.0018 + wanderY;
+
+          const dx = pointer.x - particle.x;
+          const dy = pointer.y - particle.y;
+          const distance = Math.hypot(dx, dy) || 1;
+          const influenceRadius = 360;
+
+          if (pointer.active && distance < influenceRadius) {
+            const pull = (1 - distance / influenceRadius) * 0.082;
+            particle.vx += (dx / distance) * pull;
+            particle.vy += (dy / distance) * pull;
+          }
+
+          particle.vx *= 0.956;
+          particle.vy *= 0.956;
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+        };
+
+        const render = (timestamp) => {
+          const time = timestamp * 0.001;
+          ctx.clearRect(0, 0, width, height);
+
+          for (const particle of particles) {
+            stepParticle(particle, time);
+            drawParticle(particle);
+          }
+
+          rafId = window.requestAnimationFrame(render);
+        };
+
+        const handlePointerMove = (event) => {
+          pointer.x = event.clientX;
+          pointer.y = event.clientY;
+          pointer.active = true;
+        };
+
+        const releasePointer = () => {
+          pointer.active = false;
+        };
+
+        window.addEventListener('pointermove', handlePointerMove, { passive: true });
+        window.addEventListener('pointerleave', releasePointer);
+        window.addEventListener('blur', releasePointer);
+        window.addEventListener('resize', resizeCanvas);
+
+        resizeCanvas();
+        rafId = window.requestAnimationFrame(render);
+      })();
+    </script>
+  </body>
+</html>

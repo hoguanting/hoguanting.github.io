@@ -1,0 +1,18 @@
+---
+import { getCollection, render } from 'astro:content';
+import { getEntrySlug } from '../../lib/content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+
+export async function getStaticPaths() {
+  const recEntries = await getCollection('recommendations');
+  return recEntries.map(entry => ({
+    params: { slug: getEntrySlug(entry) }, props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+<ContentLayout title={entry.data.title} date={entry.data.date}>
+  <Content />
+</ContentLayout>
