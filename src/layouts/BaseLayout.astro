@@ -15,7 +15,7 @@ interface Props {
 const baseTitle = siteConfig.title;
 const {
   title = baseTitle,
-  description = "A minimal personal website",
+  description = siteConfig.description,
   showFooter = true,
 } = Astro.props;
 
@@ -37,13 +37,40 @@ const documentTitle =
     <link rel="apple-touch-icon" href="/favicon.png" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={documentTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL("/og-image.png", Astro.site)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={documentTitle} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL("/og-image.png", Astro.site)} />
+
     {siteConfig.googleSiteVerification && (
       <meta name="google-site-verification" content={siteConfig.googleSiteVerification} />
     )}
     <meta name="generator" content={Astro.generator} />
     <title>{documentTitle}</title>
+    <script is:inline>
+      (() => {
+        const storedTheme = localStorage.getItem('theme');
+        if (storedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else if (storedTheme === 'light') {
+          document.documentElement.classList.add('light');
+        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
-  <body class="bg-[#FDFDFC] text-[#1A1A1A] antialiased selection:bg-[#EAE6DF] min-h-screen px-6 py-8 sm:px-10 sm:py-10 md:px-14 md:py-14">
+  <body class="bg-[var(--color-bg)] text-[var(--color-text)] antialiased selection:bg-[var(--color-selection)] min-h-screen px-6 py-8 sm:px-10 sm:py-10 md:px-14 md:py-14 transition-colors duration-200">
     <!-- <canvas class="terrazzo-canvas" aria-hidden="true" transition:persist></canvas> -->
     <div class="site-shell site-shell--centered relative z-10 flex flex-col">
       <div class="site-main relative flex-1 max-w-[640px] w-full">
@@ -52,8 +79,52 @@ const documentTitle =
           <slot />
         </div>
         {showFooter && (
-          <footer class="site-footer">
-            &copy; 2026 {siteConfig.name} &middot; {siteConfig.location}
+          <footer class="site-footer flex justify-between items-center">
+            <span>
+              &copy; 2026 {siteConfig.name} &middot; {siteConfig.location}
+            </span>
+            <button
+              id="theme-toggle"
+              class="relative inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--theme-toggle-bg)] text-[var(--theme-toggle-text)] transition-colors duration-200 focus:outline-none cursor-pointer shadow-xs select-none"
+              role="switch"
+              aria-checked="false"
+              aria-label="Toggle dark mode"
+            >
+              <!-- Sun Icon -->
+              <svg
+                id="theme-sun-icon"
+                class="h-4.5 w-4.5 absolute inset-0 m-auto transition-opacity duration-200 opacity-100"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v2"></path>
+                <path d="M12 20v2"></path>
+                <path d="m4.93 4.93 1.41 1.41"></path>
+                <path d="m17.66 17.66 1.41 1.41"></path>
+                <path d="M2 12h2"></path>
+                <path d="M20 12h2"></path>
+                <path d="m6.34 17.66-1.41 1.41"></path>
+                <path d="m19.07 4.93-1.41 1.41"></path>
+              </svg>
+              <!-- Moon Icon -->
+              <svg
+                id="theme-moon-icon"
+                class="h-4.5 w-4.5 absolute inset-0 m-auto transition-opacity duration-200 opacity-0"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+              </svg>
+            </button>
           </footer>
         )}
       </div>
@@ -184,5 +255,48 @@ const documentTitle =
       })();
     </script>
     -->
+    <script>
+      function initTheme() {
+        const toggleBtn = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('theme-sun-icon');
+        const moonIcon = document.getElementById('theme-moon-icon');
+
+        if (toggleBtn && sunIcon && moonIcon) {
+          const updateToggleUI = (isDark) => {
+            toggleBtn.setAttribute('aria-checked', isDark ? 'true' : 'false');
+            if (isDark) {
+              sunIcon.classList.remove('opacity-0');
+              sunIcon.classList.add('opacity-100');
+              moonIcon.classList.remove('opacity-100');
+              moonIcon.classList.add('opacity-0');
+            } else {
+              sunIcon.classList.remove('opacity-100');
+              sunIcon.classList.add('opacity-0');
+              moonIcon.classList.remove('opacity-0');
+              moonIcon.classList.add('opacity-100');
+            }
+          };
+
+          const isDark = document.documentElement.classList.contains('dark');
+          updateToggleUI(isDark);
+
+          toggleBtn.addEventListener('click', () => {
+            const isCurrentlyDark = document.documentElement.classList.contains('dark');
+            if (isCurrentlyDark) {
+              document.documentElement.classList.remove('dark');
+              document.documentElement.classList.add('light');
+              localStorage.setItem('theme', 'light');
+              updateToggleUI(false);
+            } else {
+              document.documentElement.classList.remove('light');
+              document.documentElement.classList.add('dark');
+              localStorage.setItem('theme', 'dark');
+              updateToggleUI(true);
+            }
+          });
+        }
+      }
+      document.addEventListener('astro:page-load', initTheme);
+    </script>
   </body>
 </html>

@@ -2,7 +2,8 @@ export const siteConfig = {
   name: "Guan Ting Ho",
   shortBio: "Building software, reading, and writing.",
   title: "Guan Ting Ho",
-  description: "A minimal, editorial personal website.",
+  description:
+    "Guan Ting Ho is a software engineer based in Kuala Lumpur, focused on building fast, reliable, and user-centric applications.",
   location: "Kuala Lumpur",
   googleSiteVerification: "Mi_pdGWCS_qUpnhxoYEXo3z8kBPkh5S29CylcarfLNE",
   openToWorkNotice: {
