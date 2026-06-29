@@ -2,6 +2,8 @@
 
 @theme {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Lora', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', monospace;
   --color-brand: #D96D49;
   /* Anthropic distinct coral/copper */
   --color-subtle: #8A857D;
@@ -103,10 +105,11 @@ body {
 }
 
 .type-home-title {
-  font-size: 1.125rem;
-  line-height: 1.2;
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  line-height: 1.25;
   font-weight: 600;
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
   color: #111111;
 }
 
