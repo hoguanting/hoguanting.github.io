@@ -25,7 +25,7 @@ const intro = rawIntro ?? frontmatter?.intro;
 ---
 
 <BaseLayout title={title} description={description}>
-  <div class="flex-1 mt-4">
+  <main class="flex-1 mt-4">
     <header class="mb-8">
       <h1 class="type-home-title mb-2">{title}</h1>
       {intro && <p class="type-subtitle max-w-[38rem]">{intro}</p>}
@@ -34,5 +34,5 @@ const intro = rawIntro ?? frontmatter?.intro;
     <article class="site-prose max-w-none space-y-0">
       <slot />
     </article>
-  </div>
+  </main>
 </BaseLayout>
