@@ -13,6 +13,7 @@ The new public experience centers on the homepage, a resume PDF link, and a smal
 - Keep thoughts, projects, recommendations, and the HTML resume route restorable.
 - Show a consistent parked message for disabled section routes.
 - Replace the visible HTML resume destination with a direct resume PDF link from the homepage.
+- Add a configurable bordered Open To Work notice on the homepage.
 - Keep the redesign small, reversible, and aligned with the current Astro structure.
 
 ## Non-Goals
@@ -64,6 +65,12 @@ export const siteConfig = {
   description: "A minimal, editorial personal website.",
   openToWork: true,
   location: "Kuala Lumpur",
+  openToWorkNotice: {
+    enabled: true,
+    title: "Open To Work",
+    body:
+      "I am currently looking for software engineering roles where I can work on thoughtful product experiences, reliable systems, and developer-facing tools. Placeholder copy should be replaced with specific role preferences and visa or work authorization requirements.",
+  },
   sections: {
     thoughts: false,
     projects: false,
@@ -102,6 +109,9 @@ I am a software engineer focused on building fast, reliable, and user-centric ap
 ...
 
 GitHub  LinkedIn  Email  Resume PDF
+
+Open To Work
+I am currently looking for software engineering roles...
 
 © 2026 Guan Ting Ho · Kuala Lumpur
 ```
@@ -168,6 +178,18 @@ The homepage keeps the current biography-centered content. Its link row should p
 
 It should not link to the HTML `/resume` page.
 
+After the link row and before the footer, the homepage should render a bordered Open To Work notice when `siteConfig.openToWorkNotice.enabled` is true. This section is an advertisement-style self-introduction for hiring context. It should describe the kinds of positions the author is looking for and any visa or work authorization requirements.
+
+The first implementation should use placeholder copy stored in config so the author can edit it later without changing component structure.
+
+The section should be visually restrained:
+
+- simple border using the existing border color
+- no heavy card styling
+- compact title
+- one paragraph of body copy
+- same centered column width as the rest of the homepage
+
 ## Resume Handling
 
 The HTML resume page is no longer part of the visible site direction. The preferred public resume destination is a PDF asset linked from the homepage.
@@ -199,6 +221,7 @@ Avoid adding a decorative hero, cards, gradients, or a marketing-style layout. T
 - Homepage renders without left navigation or reserved sidebar spacing.
 - Parked routes render a hidden-section message.
 - Footer appears on homepage and parked pages.
+- Open To Work notice appears on the homepage when enabled in config.
 - Navigation component remains in the codebase but is not visible in the active homepage-only mode.
 - Restoring thoughts, projects, or recommendations later should be controlled through config.
 
@@ -208,4 +231,6 @@ Avoid adding a decorative hero, cards, gradients, or a marketing-style layout. T
 - Check `/` for centered content and no left-navigation spacing.
 - Check `/thoughts`, `/projects`, `/recommendations`, and `/resume` for parked messages.
 - Check that the homepage resume link points to the configured PDF href.
+- Check that the Open To Work notice renders after the homepage link row and before the footer.
+- Check that disabling the Open To Work notice in config removes it from the homepage.
 - Check mobile width so the link row and footer wrap cleanly.
