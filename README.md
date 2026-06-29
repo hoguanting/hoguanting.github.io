@@ -1,5 +1,3 @@
-# hoguanting.github.io
-
 Source code for my personal website, built with [Astro](https://astro.build/) and deployed to GitHub Pages.
 
 ## Development
