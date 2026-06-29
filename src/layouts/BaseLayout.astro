@@ -1,13 +1,11 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
-import Navigation from '../components/Navigation.astro';
 import { siteConfig } from '../config';
 
 interface Props {
   title?: string;
   description?: string;
-  showNavigation?: boolean;
   showFooter?: boolean;
 }
 
@@ -15,7 +13,6 @@ const baseTitle = siteConfig.title;
 const {
   title = baseTitle,
   description = "A minimal personal website",
-  showNavigation = false,
   showFooter = true,
 } = Astro.props;
 
@@ -39,21 +36,15 @@ const documentTitle =
     <meta name="google-site-verification" content="Mi_pdGWCS_qUpnhxoYEXo3z8kBPkh5S29CylcarfLNE" />
     <meta name="generator" content={Astro.generator} />
     <title>{documentTitle}</title>
-    <!-- Inter for body copy; Lora italic for sidebar navigation -->
+    <!-- Inter for body copy -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
   </head>
   <body class="bg-[#FDFDFC] text-[#1A1A1A] antialiased selection:bg-[#EAE6DF] min-h-screen px-6 py-8 sm:px-10 sm:py-10 md:px-14 md:py-14">
     <!-- <canvas class="terrazzo-canvas" aria-hidden="true" transition:persist></canvas> -->
-    <div class:list={['site-shell relative z-10 flex flex-col', showNavigation ? 'site-shell--with-nav md:flex-row' : 'site-shell--centered']}>
-      {showNavigation && (
-        <aside class="shrink-0 md:w-[140px] lg:w-[152px] md:border-r md:border-[var(--color-border)]">
-          <Navigation />
-        </aside>
-      )}
-      <div class:list={['site-main relative flex-1 max-w-[640px]', showNavigation ? 'pt-6 md:pt-0 md:pl-6 lg:pl-10' : 'w-full']}>
+    <div class="site-shell site-shell--centered relative z-10 flex flex-col">
+      <div class="site-main relative flex-1 max-w-[640px] w-full">
         <!-- <div class="site-rule" aria-hidden="true"></div> -->
         <div class="site-content" transition:name="crossfade">
           <slot />

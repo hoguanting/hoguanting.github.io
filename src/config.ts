@@ -4,12 +4,6 @@ export const siteConfig = {
   title: "Guan Ting Ho",
   description: "A minimal, editorial personal website.",
   location: "Kuala Lumpur",
-  sections: {
-    thoughts: false,
-    projects: false,
-    recommendations: false,
-    resumePage: false,
-  },
   openToWork: true,
   openToWorkNotice: {
     enabled: true,
