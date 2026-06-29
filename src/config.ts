@@ -21,6 +21,9 @@ export const siteConfig = {
     github: "https://github.com/hoguanting",
     linkedin: "https://www.linkedin.com/in/hogt",
     email: "mailto:hogt2005@gmail.com",
-    resumePdf: "/resume.pdf",
+    resumePdf: {
+      enabled: false,
+      href: "/resume.pdf",
+    },
   },
 } as const;

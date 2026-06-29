@@ -20,7 +20,9 @@ Outside of work, you can usually find me exploring coffee shops around Kuala Lum
     <a href={siteConfig.links.github}>GitHub</a>
     <a href={siteConfig.links.linkedin}>LinkedIn</a>
     <a href={siteConfig.links.email}>Email</a>
-    <a href={siteConfig.links.resumePdf}>Resume PDF</a>
+    {siteConfig.links.resumePdf.enabled && (
+      <a href={siteConfig.links.resumePdf.href}>Resume PDF</a>
+    )}
   </div>
 </div>
 
