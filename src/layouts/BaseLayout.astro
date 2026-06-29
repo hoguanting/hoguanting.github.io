@@ -1,5 +1,8 @@
 ---
 import { ClientRouter } from 'astro:transitions';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
 import '../styles/global.css';
 import { siteConfig } from '../config';
 
@@ -30,16 +33,16 @@ const documentTitle =
   <head>
     <meta charset="utf-8" />
     <ClientRouter />
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <meta name="google-site-verification" content="Mi_pdGWCS_qUpnhxoYEXo3z8kBPkh5S29CylcarfLNE" />
+    {siteConfig.googleSiteVerification && (
+      <meta name="google-site-verification" content={siteConfig.googleSiteVerification} />
+    )}
     <meta name="generator" content={Astro.generator} />
     <title>{documentTitle}</title>
-    <!-- Inter for body copy -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   </head>
   <body class="bg-[#FDFDFC] text-[#1A1A1A] antialiased selection:bg-[#EAE6DF] min-h-screen px-6 py-8 sm:px-10 sm:py-10 md:px-14 md:py-14">
     <!-- <canvas class="terrazzo-canvas" aria-hidden="true" transition:persist></canvas> -->

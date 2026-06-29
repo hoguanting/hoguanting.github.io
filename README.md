@@ -18,7 +18,8 @@ npm run build
 - `public/` - static assets copied as-is to the built site
 - `.github/workflows/deploy.yml` - GitHub Pages deployment workflow
 
-Hidden sections such as thoughts, projects, recommendations, and the HTML resume route are preserved in the codebase but currently parked through `src/config.ts`.
+Hidden sections such as thoughts, projects, recommendations, and the HTML resume route have been removed from the active codebase to keep the repository minimal and focused.
+
 
 ## Deployment
 

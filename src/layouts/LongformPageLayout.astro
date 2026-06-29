@@ -2,7 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 
 interface Props {
-  title: string;
+  title?: string;
   description?: string;
   intro?: string;
   frontmatter?: {
@@ -19,7 +19,7 @@ const {
   frontmatter,
 } = Astro.props;
 
-const title = rawTitle ?? frontmatter?.title ?? '';
+const title = rawTitle ?? frontmatter?.title;
 const description = rawDescription ?? frontmatter?.description;
 const intro = rawIntro ?? frontmatter?.intro;
 ---

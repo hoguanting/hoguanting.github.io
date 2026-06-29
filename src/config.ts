@@ -4,12 +4,12 @@ export const siteConfig = {
   title: "Guan Ting Ho",
   description: "A minimal, editorial personal website.",
   location: "Kuala Lumpur",
-  openToWork: true,
+  googleSiteVerification: "Mi_pdGWCS_qUpnhxoYEXo3z8kBPkh5S29CylcarfLNE",
   openToWorkNotice: {
     enabled: true,
     title: "Open To Work",
     body:
-      "I am currently looking for software engineering roles where I can work on thoughtful product experiences, reliable systems, and developer-facing tools. This placeholder copy should be replaced with specific role preferences and visa or work authorization requirements.",
+      "I am currently looking for software engineering roles where I can work on thoughtful product experiences, reliable systems, and developer-facing tools.",
   },
   links: {
     github: "https://github.com/hoguanting",
