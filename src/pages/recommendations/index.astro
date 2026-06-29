@@ -1,20 +1,26 @@
 ---
 import LongformPageLayout from '../../layouts/LongformPageLayout.astro';
+import ParkedSection from '../../components/ParkedSection.astro';
 import RecommendationSection from '../../components/RecommendationSection.astro';
+import { siteConfig } from '../../config';
 import { recommendationSections } from '../../data/recommendations';
 ---
 
-<LongformPageLayout
-  title="Recommendations"
-  intro="Things I would point people to, revisit, or keep returning to."
->
-  <div class="space-y-8 not-prose">
-    {recommendationSections.map((section) => (
-      <RecommendationSection
-        title={section.title}
-        category={section.category}
-        items={section.items}
-      />
-    ))}
-  </div>
-</LongformPageLayout>
+{siteConfig.sections.recommendations ? (
+  <LongformPageLayout
+    title="Recommendations"
+    intro="Things I would point people to, revisit, or keep returning to."
+  >
+    <div class="space-y-8 not-prose">
+      {recommendationSections.map((section) => (
+        <RecommendationSection
+          title={section.title}
+          category={section.category}
+          items={section.items}
+        />
+      ))}
+    </div>
+  </LongformPageLayout>
+) : (
+  <ParkedSection title="Recommendations" />
+)}

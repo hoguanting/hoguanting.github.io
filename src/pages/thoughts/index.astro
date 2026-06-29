@@ -1,38 +1,49 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ParkedSection from '../../components/ParkedSection.astro';
+import { siteConfig } from '../../config';
 import { getEntrySlug } from '../../lib/content';
 import { formatDottedDate } from '../../lib/date';
 
-const thoughts = await getCollection('thoughts');
-thoughts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const thoughts = siteConfig.sections.thoughts
+  ? await getCollection('thoughts')
+  : [];
+
+if (siteConfig.sections.thoughts) {
+  thoughts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+}
 ---
 
-<BaseLayout title="Thoughts">
-  <main class="flex-1 mt-4">
-    <h1 class="type-page-title mb-2">Thoughts</h1>
-    <p class="type-subtitle mb-6">Reflections, practical thinking, and technical notes.</p>
+{siteConfig.sections.thoughts ? (
+  <BaseLayout title="Thoughts">
+    <main class="flex-1 mt-4">
+      <h1 class="type-page-title mb-2">Thoughts</h1>
+      <p class="type-subtitle mb-6">Reflections, practical thinking, and technical notes.</p>
 
-    <ul class="space-y-0">
-      {thoughts.map(thought => (
-        <li class="list-none">
-          <a
-            href={`/thoughts/${getEntrySlug(thought)}`}
-            class="thought-row group grid grid-cols-[minmax(0,max-content)_1fr_auto] items-baseline gap-x-2 py-1 no-underline"
-          >
-            <span class="thought-row-title type-list-title min-w-0">
-              {thought.data.title}
-            </span>
-            <span
-              aria-hidden="true"
-              class="tab-leader"
-            ></span>
-            <time class="thought-row-date type-meta-sm whitespace-nowrap">
-              {formatDottedDate(thought.data.date)}
-            </time>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </main>
-</BaseLayout>
+      <ul class="space-y-0">
+        {thoughts.map(thought => (
+          <li class="list-none">
+            <a
+              href={`/thoughts/${getEntrySlug(thought)}`}
+              class="thought-row group grid grid-cols-[minmax(0,max-content)_1fr_auto] items-baseline gap-x-2 py-1 no-underline"
+            >
+              <span class="thought-row-title type-list-title min-w-0">
+                {thought.data.title}
+              </span>
+              <span
+                aria-hidden="true"
+                class="tab-leader"
+              ></span>
+              <time class="thought-row-date type-meta-sm whitespace-nowrap">
+                {formatDottedDate(thought.data.date)}
+              </time>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </main>
+  </BaseLayout>
+) : (
+  <ParkedSection title="Thoughts" />
+)}
