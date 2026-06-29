@@ -1,0 +1,12 @@
+---
+import { siteConfig } from '../config';
+
+const notice = siteConfig.openToWorkNotice;
+---
+
+{notice.enabled && (
+  <section class="open-to-work" aria-labelledby="open-to-work-title">
+    <h2 id="open-to-work-title" class="open-to-work__title">{notice.title}</h2>
+    <p class="open-to-work__body">{notice.body}</p>
+  </section>
+)}

@@ -235,16 +235,72 @@ body {
   padding-left: 0;
 }
 
+.site-shell--centered {
+  width: 100%;
+}
+
+.site-shell--centered .site-main {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.site-shell--centered .site-content {
+  padding-left: 0;
+}
+
+.site-shell--with-nav .site-content {
+  padding-left: 0;
+}
+
 @media (min-width: 768px) {
-  .site-content {
+  .site-shell--with-nav .site-content {
     padding-left: 1.5rem;
   }
 }
 
 @media (min-width: 1024px) {
-  .site-content {
+  .site-shell--with-nav .site-content {
     padding-left: 2.5rem;
   }
+}
+
+.type-home-title {
+  font-size: 1.125rem;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: #111111;
+}
+
+.site-footer {
+  margin-top: 3.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-subtle);
+}
+
+.open-to-work {
+  margin-top: 2rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+}
+
+.open-to-work__title {
+  margin: 0 0 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: #111111;
+}
+
+.open-to-work__body {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: #2f2b26;
 }
 
 .terrazzo-canvas {
