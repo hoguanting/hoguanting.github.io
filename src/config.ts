@@ -10,6 +10,7 @@ export const siteConfig = {
     recommendations: false,
     resumePage: false,
   },
+  openToWork: true,
   openToWorkNotice: {
     enabled: true,
     title: "Open To Work",
