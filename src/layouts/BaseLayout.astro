@@ -54,9 +54,9 @@ const documentTitle =
       )}
       <div class:list={['site-main relative flex-1 max-w-[640px]', showNavigation ? 'pt-6 md:pt-0 md:pl-6 lg:pl-10' : 'w-full']}>
         <!-- <div class="site-rule" aria-hidden="true"></div> -->
-        <article class="site-content" transition:name="crossfade">
+        <div class="site-content" transition:name="crossfade">
           <slot />
-        </article>
+        </div>
         {showFooter && (
           <footer class="site-footer">
             &copy; 2026 {siteConfig.name} &middot; {siteConfig.location}
