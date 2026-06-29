@@ -14,11 +14,11 @@ const { title, date } = Astro.props;
 <BaseLayout title={title}>
   <main class="flex-1 mt-4">
     <header class="mb-10 border-b border-[var(--color-border)] pb-8">
-      <h1 class="text-3xl font-medium tracking-tight mb-3 text-[#111111]">{title}</h1>
-      <time class="text-sm text-[var(--color-subtle)] tabular-nums">{formatIsoDate(date)}</time>
+      <h1 class="type-entry-title mb-3">{title}</h1>
+      <time class="type-meta">{formatIsoDate(date)}</time>
     </header>
     
-    <article class="prose prose-neutral max-w-none text-[#2E2E2A]">
+    <article class="site-prose max-w-none">
       <slot />
     </article>
 

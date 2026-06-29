@@ -10,24 +10,24 @@ thoughts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 <BaseLayout title="Thoughts">
   <main class="flex-1 mt-4">
-    <h1 class="text-2xl font-medium tracking-tight mb-2">Thoughts</h1>
-    <p class="page-subtitle">Reflections, practical thinking, and technical notes.</p>
+    <h1 class="type-page-title mb-2">Thoughts</h1>
+    <p class="type-subtitle mb-6">Reflections, practical thinking, and technical notes.</p>
 
     <ul class="space-y-0">
       {thoughts.map(thought => (
         <li class="list-none">
           <a
             href={`/thoughts/${getEntrySlug(thought)}`}
-            class="group grid grid-cols-[minmax(0,max-content)_1fr_auto] items-baseline gap-x-2 py-1 text-[#2f2a26] no-underline transition-colors hover:text-[var(--color-brand)]"
+            class="thought-row group grid grid-cols-[minmax(0,max-content)_1fr_auto] items-baseline gap-x-2 py-1 no-underline"
           >
-            <span class="min-w-0 text-[14px] leading-[1.2]">
+            <span class="thought-row-title type-list-title min-w-0">
               {thought.data.title}
             </span>
             <span
               aria-hidden="true"
               class="tab-leader"
             ></span>
-            <time class="text-xs text-[var(--color-subtle)] tabular-nums font-medium whitespace-nowrap transition-colors group-hover:text-[var(--color-brand)]">
+            <time class="thought-row-date type-meta-sm whitespace-nowrap">
               {formatDottedDate(thought.data.date)}
             </time>
           </a>

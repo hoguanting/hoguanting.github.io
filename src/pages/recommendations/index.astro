@@ -1,66 +1,20 @@
 ---
-import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getEntrySlug } from '../../lib/content';
-import {
-  RECOMMENDATION_CATEGORY_KEYS,
-  RECOMMENDATION_CATEGORY_META,
-} from '../../lib/recommendationCategories';
-
-const recommendations = await getCollection('recommendations');
-recommendations.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
-const groupedRecommendations = Object.fromEntries(
-  RECOMMENDATION_CATEGORY_KEYS.map((category) => [category, recommendations.filter((rec) => rec.data.category === category)])
-);
+import LongformPageLayout from '../../layouts/LongformPageLayout.astro';
+import RecommendationSection from '../../components/RecommendationSection.astro';
+import { recommendationSections } from '../../data/recommendations';
 ---
 
-<BaseLayout title="Recommendations">
-  <main class="flex-1 mt-4">
-    <h1 class="text-[28px] font-medium tracking-tight leading-tight mb-1">Recommendations</h1>
-    <p class="page-subtitle">List of my recommended articles, videos, and books</p>
-
-    <div class="space-y-8">
-      {RECOMMENDATION_CATEGORY_KEYS.map((category) => (
-        <section>
-          <h2 class="text-2xl font-semibold tracking-tight mb-3">{RECOMMENDATION_CATEGORY_META[category].displayName}</h2>
-          {groupedRecommendations[category].length === 0 ? (
-            <p class="text-sm text-[var(--color-subtle)]">No recommendations yet.</p>
-          ) : (
-            <ul class="space-y-1">
-              {groupedRecommendations[category].map((rec) => (
-                <li class="group py-0.5 list-none">
-                  <div class="flex items-start justify-between gap-2">
-                    <div class="flex items-start gap-2.5 w-full">
-                      <div set:html={RECOMMENDATION_CATEGORY_META[category].icon} />
-                      <div class="flex-1 min-w-0">
-                        <div class="flex items-start justify-between gap-3">
-                          <div class="text-[13px] leading-[1.25] text-[#322d28] pt-[1px]">
-                            <a href={`/recommendations/${getEntrySlug(rec)}`} class="no-underline hover:text-[var(--color-brand)] transition-colors">
-                              {rec.data.title}
-                            </a>
-                          </div>
-                          {rec.data.sourceUrl && (
-                            <a
-                              href={rec.data.sourceUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              aria-label={`Open source for ${rec.data.title}`}
-                              class="text-[var(--color-subtle)] hover:text-[var(--color-brand)] flex-shrink-0 transition-colors mt-[1px]"
-                            >
-                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-      ))}
-    </div>
-  </main>
-</BaseLayout>
+<LongformPageLayout
+  title="Recommendations"
+  intro="Things I would point people to, revisit, or keep returning to."
+>
+  <div class="space-y-8 not-prose">
+    {recommendationSections.map((section) => (
+      <RecommendationSection
+        title={section.title}
+        category={section.category}
+        items={section.items}
+      />
+    ))}
+  </div>
+</LongformPageLayout>

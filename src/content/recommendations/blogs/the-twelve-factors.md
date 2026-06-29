@@ -1,10 +1,10 @@
 ---
-title: "Bob Nystrom's stuffwithstuff"
-slug: "bob-nystrom-s-stuffwithstuff"
-date: 2024-01-10
+title: "The Twelve Factors"
+slug: "the-twelve-factors"
+date: 2026-01-10
 type: "recommendation"
 category: "Blogs"
-sourceUrl: "https://journal.stuffwithstuff.com/"
+sourceUrl: "https://12factor.net/"
 summary: "Excellent writing on programming languages and game dev."
 tags: ["Programming"]
 ---
