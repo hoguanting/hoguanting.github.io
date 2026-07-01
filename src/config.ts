@@ -22,8 +22,8 @@ export const siteConfig = {
     linkedin: "https://www.linkedin.com/in/hogt",
     email: "mailto:hogt2005@gmail.com",
     resumePdf: {
-      enabled: false,
-      href: "/resume.pdf",
+      enabled: true,
+      href: "/Guan-Ting-Ho-Resume-July-2026.pdf",
     },
   },
 } as const;
