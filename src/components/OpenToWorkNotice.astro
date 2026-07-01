@@ -10,6 +10,18 @@ const notice = siteConfig.openToWorkNotice;
       <span class="open-to-work__indicator" aria-hidden="true"></span>
       <h2 id="open-to-work-title" class="open-to-work__title">{notice.title}</h2>
     </div>
-    <p class="open-to-work__body">{notice.body}</p>
+    <p class="open-to-work__body">
+      {notice.body} Reach me via{" "}
+      <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      {" "}or <a href={siteConfig.links.email}>email</a>.
+    </p>
+    <dl class="open-to-work__details" aria-label="Availability details">
+      {notice.details.map((detail) => (
+        <div class:list={["open-to-work__detail", !("label" in detail) && "open-to-work__detail--unlabeled"]}>
+          {"label" in detail && <dt>{detail.label}</dt>}
+          <dd>{detail.value}</dd>
+        </div>
+      ))}
+    </dl>
   </section>
 )}

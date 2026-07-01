@@ -10,7 +10,12 @@ export const siteConfig = {
     enabled: true,
     title: "Open To Work",
     body:
-      "I am currently looking for software engineering roles where I can work on thoughtful product experiences, reliable systems, and developer-facing tools.",
+      "I'm looking for internship, graduate or entry-level software engineering roles in fintech or productivity products.",
+    details: [
+      {
+        value: "Available from July 2026 · Graduating November 2026",
+      },
+    ],
   },
   links: {
     github: "https://github.com/hoguanting",

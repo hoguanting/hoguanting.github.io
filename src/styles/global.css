@@ -44,7 +44,7 @@
 @theme {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-serif: 'Lora', Georgia, serif;
-  --font-mono: 'IBM Plex Mono', monospace;
+  --font-mono: ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
   --color-brand: #D96D49;
   /* Anthropic distinct coral/copper */
   --color-subtle: #8A857D;
@@ -89,6 +89,11 @@ body {
 
 .site-prose :where(p, ul, ol) {
   margin-bottom: 1.25rem;
+}
+
+.site-prose :where(p) {
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .site-prose :where(ul, ol) {
@@ -225,7 +230,64 @@ body {
   font-size: 0.9375rem;
   line-height: 1.7;
   letter-spacing: 0;
+  text-align: left;
   color: var(--color-text-prose);
+}
+
+.open-to-work__details {
+  display: grid;
+  gap: 0;
+  margin: 0.9rem 0 0;
+  padding: 0.125rem 0 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.open-to-work__detail {
+  display: grid;
+  grid-template-columns: 5.75rem minmax(0, 1fr);
+  gap: 0.75rem;
+  padding: 0.65rem 0 0;
+}
+
+.open-to-work__detail + .open-to-work__detail {
+  margin-top: 0.15rem;
+}
+
+.open-to-work__detail--unlabeled {
+  grid-template-columns: 1fr;
+}
+
+.open-to-work__detail dt {
+  margin: 0;
+  font-size: 0.6875rem;
+  line-height: 1.6;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-subtle);
+}
+
+.open-to-work__detail dd {
+  margin: 0;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  letter-spacing: 0;
+  color: var(--color-text-prose);
+}
+
+.open-to-work__body a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+  .open-to-work__detail {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
 }
 
 .terrazzo-canvas {

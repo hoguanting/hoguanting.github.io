@@ -262,6 +262,9 @@ const documentTitle =
         const moonIcon = document.getElementById('theme-moon-icon');
 
         if (toggleBtn && sunIcon && moonIcon) {
+          if (toggleBtn.dataset.themeToggleReady === 'true') return;
+          toggleBtn.dataset.themeToggleReady = 'true';
+
           const updateToggleUI = (isDark) => {
             toggleBtn.setAttribute('aria-checked', isDark ? 'true' : 'false');
             if (isDark) {
@@ -296,6 +299,13 @@ const documentTitle =
           });
         }
       }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initTheme, { once: true });
+      } else {
+        initTheme();
+      }
+
       document.addEventListener('astro:page-load', initTheme);
     </script>
   </body>
